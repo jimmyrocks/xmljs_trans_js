@@ -1,0 +1,17 @@
+{
+  "name": "xmljs_trans_js",
+  "version": "0.0.1",
+  "description": "Makes converting JS to XML and back really easy! Even on Windows!",
+  "author": {
+    "name": "Jim McAndrew",
+    "email": "jim@loc8.us",
+    "url": "http://loc8.us"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jimmyrocks/xmljs_trans_js"
+  },
+  "dependencies": {
+    "xml2js": "0.4.1"
+  }
+}
