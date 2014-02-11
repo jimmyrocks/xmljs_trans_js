@@ -113,7 +113,7 @@ exports.xmlify = function(jsToConvert, options) {
         }
       }
       for (var attrIndex in attributes) {
-        child.att(attrIndex, attributes[attrIndex]);
+        child.att(attrIndex || '', attributes[attrIndex] || '');
       }
     }
   };
