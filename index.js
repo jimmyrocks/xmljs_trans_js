@@ -104,7 +104,7 @@ exports.xmlify = function(jsToConvert, options) {
           }
         } else {
           // It's something we're going to turn into a string
-          newData = currentSubKey.toString() ? currentSubKey.toString() : '';
+          newData = (currentSubKey === 0 || currentSubKey) ? currentSubKey.toString() : '';
           if (subKey === options.textField || subKey === options.cdataField || subKey === options.arrayField) {
             child.text(newData);
           } else {
