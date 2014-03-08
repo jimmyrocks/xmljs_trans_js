@@ -1,51 +1,51 @@
 var xml2js = require('xml2js'),
-builder = require('./node_modules/xml2js/node_modules/xmlbuilder'),
-defaults = {
-  'xmlRootElement': 'document',
-  'textField': '_text',
-  'arrayField': '_element',
-  'cdataField': '_cdata',
-  'breakOutSingleField': true,
-  'alwaysUseRootElement': false,
-  'jsonSettings': {
-    'mergeAttrs': true
-  },
-  'xmlSettings': {
-    version: '1.0',
-    encoding: 'UTF-8'
-  }
-};
+  builder = require('./node_modules/xml2js/node_modules/xmlbuilder'),
+  defaults = {
+    'xmlRootElement': 'document',
+    'textField': '_text',
+    'arrayField': '_element',
+    'cdataField': '_cdata',
+    'breakOutSingleField': true,
+    'alwaysUseRootElement': false,
+    'jsonSettings': {
+      'mergeAttrs': true
+    },
+    'xmlSettings': {
+      version: '1.0',
+      encoding: 'UTF-8'
+    }
+  };
 
 exports.jsonify = function(xml, options) {
   var parser = new xml2js.Parser(options),
-  json = {},
-  cleanAttributes = function(attribute, child) {
-    var innerAttribute;
-    if (typeof(attribute) === 'object') {
-      for (innerAttribute in attribute) {
-        if (innerAttribute === '$' || innerAttribute === defaults.arrayField) {
-          child = cleanAttributes(attribute[innerAttribute], {});
-        } else {
-          if (Object.prototype.toString.call(attribute[innerAttribute]) === '[object Array]' && attribute[innerAttribute].length === 1) {
-            child[innerAttribute] = cleanAttributes(attribute[innerAttribute][0], {});
+    json = {},
+    cleanAttributes = function(attribute, child) {
+      var innerAttribute;
+      if (typeof(attribute) === 'object') {
+        for (innerAttribute in attribute) {
+          if (innerAttribute === '$' || innerAttribute === defaults.arrayField) {
+            child = cleanAttributes(attribute[innerAttribute], {});
           } else {
-            if (Object.prototype.toString.call(attribute) === '[object Array]') {
-              if (Object.prototype.toString.call(child) === '[object Array]') {
-                child.push(cleanAttributes(attribute[innerAttribute], {}));
-              } else {
-                child = [cleanAttributes(attribute[innerAttribute], {})];
-              }
+            if (Object.prototype.toString.call(attribute[innerAttribute]) === '[object Array]' && attribute[innerAttribute].length === 1) {
+              child[innerAttribute] = cleanAttributes(attribute[innerAttribute][0], {});
             } else {
-              child[innerAttribute] = cleanAttributes(attribute[innerAttribute], {});
+              if (Object.prototype.toString.call(attribute) === '[object Array]') {
+                if (Object.prototype.toString.call(child) === '[object Array]') {
+                  child.push(cleanAttributes(attribute[innerAttribute], {}));
+                } else {
+                  child = [cleanAttributes(attribute[innerAttribute], {})];
+                }
+              } else {
+                child[innerAttribute] = cleanAttributes(attribute[innerAttribute], {});
+              }
             }
           }
         }
+      } else {
+        child = attribute;
       }
-    } else {
-      child = attribute;
-    }
-    return child;
-  };
+      return child;
+    };
 
   // Go through the options and assign them
   for (var option in defaults.jsonSettings) {
@@ -53,7 +53,7 @@ exports.jsonify = function(xml, options) {
     options[option] = options[option] ? options[option] : defaults[option];
   }
 
-  parser.parseString(xml, function (err, result) {
+  parser.parseString(xml, function(err, result) {
     cleanAttributes(result, json);
   });
   return json;
@@ -63,8 +63,8 @@ exports.xmlify = function(jsToConvert, options) {
   var outData;
   var buildNodes = function(inData, child) {
     var attributes,
-    newData,
-    currentSubKey;
+      newData,
+      currentSubKey;
 
     // Loop through the data
     for (var key in inData) {
@@ -73,9 +73,9 @@ exports.xmlify = function(jsToConvert, options) {
         currentSubKey = inData[key][subKey];
 
         // Hack to treat arrays as XML elements
-        if( Object.prototype.toString.call( inData[key] ) === '[object Array]' ) {
+        if (Object.prototype.toString.call(inData[key]) === '[object Array]') {
           subKey = options.arrayField;
-          if (typeof (currentSubKey) !== 'object') {
+          if (typeof(currentSubKey) !== 'object') {
             currentSubKey = {};
             currentSubKey[options.textField] = currentSubKey;
           }
@@ -84,10 +84,10 @@ exports.xmlify = function(jsToConvert, options) {
         if (typeof currentSubKey === 'object') {
           // It's either a tag or an array of tags
           newData = {};
-          if( Object.prototype.toString.call( currentSubKey ) === '[object Array]' ) {
+          if (Object.prototype.toString.call(currentSubKey) === '[object Array]') {
             // It's an array of tags
             for (var index in currentSubKey) {
-              if ( Object.prototype.toString.call( currentSubKey[index] ) === '[object Object]') {
+              if (Object.prototype.toString.call(currentSubKey[index]) === '[object Object]') {
                 // Tags in an array
                 newData[subKey] = currentSubKey[index];
               } else {
@@ -143,5 +143,7 @@ exports.xmlify = function(jsToConvert, options) {
     throw 'Type: ' + typeof(jsToConvert) + ' is not object';
   }
 
-  return outData.end({pretty: true});
+  return outData.end({
+    pretty: true
+  });
 };

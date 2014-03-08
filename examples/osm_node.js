@@ -1,7 +1,7 @@
 var xmljs_translator = require('../');
 
 var osmAttributes = {
-  'attr' : {
+  'attr': {
     'version': '0.6',
     'generator': 'OpenStreetMap server',
     'copyright': 'OpenStreetMap and contributors',
@@ -21,16 +21,25 @@ var inD = {
     'uid': 7,
     'visible': true,
     'timestamp': '2009-09-06T03:48:36Z',
-    'tag': [
-      {'k': 'name', v: 'test'},
-      {'k': 'operator', v: 'test'},
-      {'k': 'sport', v: 'shooting'},
-      {'k': 'type', v: 'paintball'}
-    ]
+    'tag': [{
+      'k': 'name',
+      v: 'test'
+    }, {
+      'k': 'operator',
+      v: 'test'
+    }, {
+      'k': 'sport',
+      v: 'shooting'
+    }, {
+      'k': 'type',
+      v: 'paintball'
+    }]
   }
 };
 
-var outData = {osm: osmAttributes.attr};
+var outData = {
+  osm: osmAttributes.attr
+};
 for (var key in inD) {
   outData.osm[key] = inD[key];
 }
