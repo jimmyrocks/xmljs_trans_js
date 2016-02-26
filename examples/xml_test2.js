@@ -15,9 +15,9 @@ var json = {
     }, {
       'k': 'awesome',
       'v': 'no'
-    }, ]
+    }]
   }
 };
 
-//console.log(JSON.stringify(xmljs_translator.jsonify(xmljs_translator.xmlify(json)),null,2));
+// console.log(JSON.stringify(xmljs_translator.jsonify(xmljs_translator.xmlify(json)),null,2));
 console.log(xmljs_translator.xmlify(json));
