@@ -1,0 +1,15 @@
+{
+  "xmlRootElement": "document",
+  "textField": "_text",
+  "arrayField": "_element",
+  "cdataField": "_cdata",
+  "breakOutSingleField": true,
+  "alwaysUseRootElement": false,
+  "jsonSettings": {
+    "mergeAttrs": true
+  },
+  "xmlSettings": {
+    "version": "1.0",
+    "encoding": "UTF-8"
+  }
+}
