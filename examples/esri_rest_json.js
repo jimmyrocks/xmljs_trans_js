@@ -1,5 +1,4 @@
-var libxmljs = require('libxmljs'),
-  xmljs_translator = require('../'),
+var xmljs_translator = require('../'),
   http = require('http'),
   options = {
     'host': 'sampleserver1.arcgisonline.com',
