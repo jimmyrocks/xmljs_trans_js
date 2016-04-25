@@ -41,7 +41,7 @@ var buildXmlNode = module.exports = function (inData, child, defaults) {
         }
       } else {
         // It's something we're going to turn into a string
-        newData = (currentSubKey === 0 || currentSubKey) ? currentSubKey.toString() : '';
+        newData = (currentSubKey === 0 || currentSubKey === false || currentSubKey) ? currentSubKey.toString() : '';
         if (subKey === defaults.textField || subKey === defaults.cdataField || subKey === defaults.arrayField) {
           child.text(newData);
         } else {
