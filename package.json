@@ -1,6 +1,6 @@
 {
   "name": "xmljs_trans_js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Makes converting JS to XML and back really easy! Even on Windows!",
   "author": {
     "name": "Jim McAndrew",
