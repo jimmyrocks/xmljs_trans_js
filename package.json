@@ -12,6 +12,7 @@
     "url": "https://github.com/jimmyrocks/xmljs_trans_js"
   },
   "dependencies": {
-    "xml2js": "0.4.16"
+    "xml2js": "0.4.16",
+    "xmlbuilder": "^8.2.2"
   }
 }
