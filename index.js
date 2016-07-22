@@ -1,5 +1,5 @@
 var buildXmlNode = require('./src/buildXmlNode');
-var builder = require('./node_modules/xml2js/node_modules/xmlbuilder');
+var builder = require('xmlbuilder');
 var buildJsonAttribute = require('./src/buildJsonAttribute');
 var defaults = require('./defaults');
 var mergeObjects = require('./src/mergeObjects');
